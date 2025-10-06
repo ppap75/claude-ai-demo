@@ -46,14 +46,14 @@ class Message(BaseModel):
 
 class ChatRequest(BaseModel):
     message: str = Field(..., description="User message to send to Claude")
-    model: str = Field(default="claude-4-5-sonnet-20241022", description="Claude model to use")
+    model: str = Field(default="claude-sonnet-4-5-20250929", description="Claude model to use")
     max_tokens: int = Field(default=1024, ge=1, le=4096, description="Maximum tokens in response")
     system_prompt: Optional[str] = Field(None, description="Optional system prompt")
 
 
 class ConversationRequest(BaseModel):
     messages: List[Message] = Field(..., description="List of conversation messages")
-    model: str = Field(default="claude-4-5-sonnet-20241022", description="Claude model to use")
+    model: str = Field(default="claude-sonnet-4-5-20250929", description="Claude model to use")
     max_tokens: int = Field(default=1024, ge=1, le=4096, description="Maximum tokens in response")
     system_prompt: Optional[str] = Field(None, description="Optional system prompt")
 
@@ -96,8 +96,8 @@ async def list_models():
     return {
         "models": [
             {
-                "id": "claude-4-5-sonnet-20241022",
-                "name": "Claude 4.5 Sonnet",
+                "id": "claude-sonnet-4-5-20250929",
+                "name": "Claude Sonnet 4.5",
                 "description": "Latest and most capable Sonnet model"
             },
             {
@@ -130,7 +130,7 @@ async def chat(request: ChatRequest):
     Send a single message to Claude and get a response.
     
     - **message**: The message to send to Claude
-    - **model**: Claude model to use (default: claude-4-5-sonnet-20241022)
+    - **model**: Claude model to use (default: claude-sonnet-4-5-20250929)
     - **max_tokens**: Maximum tokens in response (default: 1024)
     - **system_prompt**: Optional system prompt to customize behavior
     """
@@ -164,7 +164,7 @@ async def conversation(request: ConversationRequest):
     Send a multi-turn conversation to Claude.
     
     - **messages**: List of messages with role and content
-    - **model**: Claude model to use (default: claude-4-5-sonnet-20241022)
+    - **model**: Claude model to use (default: claude-sonnet-4-5-20250929)
     - **max_tokens**: Maximum tokens in response (default: 1024)
     - **system_prompt**: Optional system prompt to customize behavior
     """
